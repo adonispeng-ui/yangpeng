@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.CountdownEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.CountdownEntity" >
+    <result column="id_countdown" property="idCountdown" jdbcType="VARCHAR" />
+    <result column="subject_countdown" property="subjectCountdown" jdbcType="VARCHAR" />
+    <result column="content_countdown" property="contentCountdown" jdbcType="VARCHAR" />
+    <result column="create_time_countdown" property="createTimeCountdown" jdbcType="TIMESTAMP" />
+    <result column="time_countdown" property="timeCountdown" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.CountdownEntity" >
+    insert into countdown (id_countdown, subject_countdown, content_countdown, 
+      create_time_countdown, time_countdown)
+    values (#{idCountdown,jdbcType=VARCHAR}, #{subjectCountdown,jdbcType=VARCHAR}, #{contentCountdown,jdbcType=VARCHAR}, 
+      #{createTimeCountdown,jdbcType=TIMESTAMP}, #{timeCountdown,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.CountdownEntity" >
+    insert into countdown
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idCountdown != null" >
+        id_countdown,
+      </if>
+      <if test="subjectCountdown != null" >
+        subject_countdown,
+      </if>
+      <if test="contentCountdown != null" >
+        content_countdown,
+      </if>
+      <if test="createTimeCountdown != null" >
+        create_time_countdown,
+      </if>
+      <if test="timeCountdown != null" >
+        time_countdown,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idCountdown != null" >
+        #{idCountdown,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCountdown != null" >
+        #{subjectCountdown,jdbcType=VARCHAR},
+      </if>
+      <if test="contentCountdown != null" >
+        #{contentCountdown,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimeCountdown != null" >
+        #{createTimeCountdown,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeCountdown != null" >
+        #{timeCountdown,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.ArticleEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.ArticleEntity" >
+    <id column="account_user_id" property="accountUserId" jdbcType="VARCHAR" />
+    <result column="id_article" property="idArticle" jdbcType="VARCHAR" />
+    <result column="id_coluimn" property="idColuimn" jdbcType="VARCHAR" />
+    <result column="click_nbr_article" property="clickNbrArticle" jdbcType="INTEGER" />
+    <result column="create_time_article" property="createTimeArticle" jdbcType="TIMESTAMP" />
+    <result column="subject_article" property="subjectArticle" jdbcType="VARCHAR" />
+    <result column="content_article" property="contentArticle" jdbcType="VARCHAR" />
+    <result column="update_time_article" property="updateTimeArticle" jdbcType="TIMESTAMP" />
+    <result column="display_order_article" property="displayOrderArticle" jdbcType="INTEGER" />
+    <result column="is_top_article" property="isTopArticle" jdbcType="INTEGER" />
+    <result column="essence_article" property="essenceArticle" jdbcType="INTEGER" />
+    <result column="collection_nbr_article" property="collectionNbrArticle" jdbcType="INTEGER" />
+    <result column="share_nbr_article" property="shareNbrArticle" jdbcType="INTEGER" />
+    <result column="show_img" property="showImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_user_id, id_article, id_coluimn, click_nbr_article, create_time_article, 
+    subject_article, content_article, update_time_article, display_order_article, is_top_article, 
+    essence_article, collection_nbr_article, share_nbr_article, show_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from article
+    where account_user_id = #{accountUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from article
+    where account_user_id = #{accountUserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.ArticleEntity" >
+    insert into article (account_user_id, id_article, id_coluimn, 
+      click_nbr_article, create_time_article, subject_article, 
+      content_article, update_time_article, display_order_article, 
+      is_top_article, essence_article, collection_nbr_article, 
+      share_nbr_article, show_img)
+    values (#{accountUserId,jdbcType=VARCHAR}, #{idArticle,jdbcType=VARCHAR}, #{idColuimn,jdbcType=VARCHAR}, 
+      #{clickNbrArticle,jdbcType=INTEGER}, #{createTimeArticle,jdbcType=TIMESTAMP}, #{subjectArticle,jdbcType=VARCHAR}, 
+      #{contentArticle,jdbcType=VARCHAR}, #{updateTimeArticle,jdbcType=TIMESTAMP}, #{displayOrderArticle,jdbcType=INTEGER}, 
+      #{isTopArticle,jdbcType=INTEGER}, #{essenceArticle,jdbcType=INTEGER}, #{collectionNbrArticle,jdbcType=INTEGER}, 
+      #{shareNbrArticle,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.ArticleEntity" >
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountUserId != null" >
+        account_user_id,
+      </if>
+      <if test="idArticle != null" >
+        id_article,
+      </if>
+      <if test="idColuimn != null" >
+        id_coluimn,
+      </if>
+      <if test="clickNbrArticle != null" >
+        click_nbr_article,
+      </if>
+      <if test="createTimeArticle != null" >
+        create_time_article,
+      </if>
+      <if test="subjectArticle != null" >
+        subject_article,
+      </if>
+      <if test="contentArticle != null" >
+        content_article,
+      </if>
+      <if test="updateTimeArticle != null" >
+        update_time_article,
+      </if>
+      <if test="displayOrderArticle != null" >
+        display_order_article,
+      </if>
+      <if test="isTopArticle != null" >
+        is_top_article,
+      </if>
+      <if test="essenceArticle != null" >
+        essence_article,
+      </if>
+      <if test="collectionNbrArticle != null" >
+        collection_nbr_article,
+      </if>
+      <if test="shareNbrArticle != null" >
+        share_nbr_article,
+      </if>
+      <if test="showImg != null" >
+        show_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountUserId != null" >
+        #{accountUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="idArticle != null" >
+        #{idArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="idColuimn != null" >
+        #{idColuimn,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNbrArticle != null" >
+        #{clickNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="createTimeArticle != null" >
+        #{createTimeArticle,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectArticle != null" >
+        #{subjectArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="contentArticle != null" >
+        #{contentArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTimeArticle != null" >
+        #{updateTimeArticle,jdbcType=TIMESTAMP},
+      </if>
+      <if test="displayOrderArticle != null" >
+        #{displayOrderArticle,jdbcType=INTEGER},
+      </if>
+      <if test="isTopArticle != null" >
+        #{isTopArticle,jdbcType=INTEGER},
+      </if>
+      <if test="essenceArticle != null" >
+        #{essenceArticle,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNbrArticle != null" >
+        #{collectionNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="shareNbrArticle != null" >
+        #{shareNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="showImg != null" >
+        #{showImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yangpeng.entity.ArticleEntity" >
+    update article
+    <set >
+      <if test="idArticle != null" >
+        id_article = #{idArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="idColuimn != null" >
+        id_coluimn = #{idColuimn,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNbrArticle != null" >
+        click_nbr_article = #{clickNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="createTimeArticle != null" >
+        create_time_article = #{createTimeArticle,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectArticle != null" >
+        subject_article = #{subjectArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="contentArticle != null" >
+        content_article = #{contentArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTimeArticle != null" >
+        update_time_article = #{updateTimeArticle,jdbcType=TIMESTAMP},
+      </if>
+      <if test="displayOrderArticle != null" >
+        display_order_article = #{displayOrderArticle,jdbcType=INTEGER},
+      </if>
+      <if test="isTopArticle != null" >
+        is_top_article = #{isTopArticle,jdbcType=INTEGER},
+      </if>
+      <if test="essenceArticle != null" >
+        essence_article = #{essenceArticle,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNbrArticle != null" >
+        collection_nbr_article = #{collectionNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="shareNbrArticle != null" >
+        share_nbr_article = #{shareNbrArticle,jdbcType=INTEGER},
+      </if>
+      <if test="showImg != null" >
+        show_img = #{showImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_user_id = #{accountUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yangpeng.entity.ArticleEntity" >
+    update article
+    set id_article = #{idArticle,jdbcType=VARCHAR},
+      id_coluimn = #{idColuimn,jdbcType=VARCHAR},
+      click_nbr_article = #{clickNbrArticle,jdbcType=INTEGER},
+      create_time_article = #{createTimeArticle,jdbcType=TIMESTAMP},
+      subject_article = #{subjectArticle,jdbcType=VARCHAR},
+      content_article = #{contentArticle,jdbcType=VARCHAR},
+      update_time_article = #{updateTimeArticle,jdbcType=TIMESTAMP},
+      display_order_article = #{displayOrderArticle,jdbcType=INTEGER},
+      is_top_article = #{isTopArticle,jdbcType=INTEGER},
+      essence_article = #{essenceArticle,jdbcType=INTEGER},
+      collection_nbr_article = #{collectionNbrArticle,jdbcType=INTEGER},
+      share_nbr_article = #{shareNbrArticle,jdbcType=INTEGER},
+      show_img = #{showImg,jdbcType=VARCHAR}
+    where account_user_id = #{accountUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>

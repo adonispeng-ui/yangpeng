@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.UserEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.UserEntity" >
+    <id column="id_user" property="idUser" jdbcType="VARCHAR" />
+    <result column="account_user" property="accountUser" jdbcType="VARCHAR" />
+    <result column="phone_user" property="phoneUser" jdbcType="INTEGER" />
+    <result column="email_user" property="emailUser" jdbcType="VARCHAR" />
+    <result column="password_user" property="passwordUser" jdbcType="VARCHAR" />
+    <result column="create_time_user" property="createTimeUser" jdbcType="TIMESTAMP" />
+    <result column="address_user" property="addressUser" jdbcType="VARCHAR" />
+    <result column="last_login_time_user" property="lastLoginTimeUser" jdbcType="TIMESTAMP" />
+    <result column="img_user" property="imgUser" jdbcType="VARCHAR" />
+    <result column="ip_user" property="ipUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id_user, account_user, phone_user, email_user, password_user, create_time_user, address_user, 
+    last_login_time_user, img_user, ip_user
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id_user = #{idUser,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where id_user = #{idUser,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.UserEntity" >
+    insert into user (id_user, account_user, phone_user, 
+      email_user, password_user, create_time_user, 
+      address_user, last_login_time_user, img_user, 
+      ip_user)
+    values (#{idUser,jdbcType=VARCHAR}, #{accountUser,jdbcType=VARCHAR}, #{phoneUser,jdbcType=INTEGER}, 
+      #{emailUser,jdbcType=VARCHAR}, #{passwordUser,jdbcType=VARCHAR}, #{createTimeUser,jdbcType=TIMESTAMP}, 
+      #{addressUser,jdbcType=VARCHAR}, #{lastLoginTimeUser,jdbcType=TIMESTAMP}, #{imgUser,jdbcType=VARCHAR}, 
+      #{ipUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.UserEntity" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idUser != null" >
+        id_user,
+      </if>
+      <if test="accountUser != null" >
+        account_user,
+      </if>
+      <if test="phoneUser != null" >
+        phone_user,
+      </if>
+      <if test="emailUser != null" >
+        email_user,
+      </if>
+      <if test="passwordUser != null" >
+        password_user,
+      </if>
+      <if test="createTimeUser != null" >
+        create_time_user,
+      </if>
+      <if test="addressUser != null" >
+        address_user,
+      </if>
+      <if test="lastLoginTimeUser != null" >
+        last_login_time_user,
+      </if>
+      <if test="imgUser != null" >
+        img_user,
+      </if>
+      <if test="ipUser != null" >
+        ip_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idUser != null" >
+        #{idUser,jdbcType=VARCHAR},
+      </if>
+      <if test="accountUser != null" >
+        #{accountUser,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneUser != null" >
+        #{phoneUser,jdbcType=INTEGER},
+      </if>
+      <if test="emailUser != null" >
+        #{emailUser,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordUser != null" >
+        #{passwordUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimeUser != null" >
+        #{createTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressUser != null" >
+        #{addressUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTimeUser != null" >
+        #{lastLoginTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUser != null" >
+        #{imgUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ipUser != null" >
+        #{ipUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yangpeng.entity.UserEntity" >
+    update user
+    <set >
+      <if test="accountUser != null" >
+        account_user = #{accountUser,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneUser != null" >
+        phone_user = #{phoneUser,jdbcType=INTEGER},
+      </if>
+      <if test="emailUser != null" >
+        email_user = #{emailUser,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordUser != null" >
+        password_user = #{passwordUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimeUser != null" >
+        create_time_user = #{createTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressUser != null" >
+        address_user = #{addressUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTimeUser != null" >
+        last_login_time_user = #{lastLoginTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUser != null" >
+        img_user = #{imgUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ipUser != null" >
+        ip_user = #{ipUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_user = #{idUser,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yangpeng.entity.UserEntity" >
+    update user
+    set account_user = #{accountUser,jdbcType=VARCHAR},
+      phone_user = #{phoneUser,jdbcType=INTEGER},
+      email_user = #{emailUser,jdbcType=VARCHAR},
+      password_user = #{passwordUser,jdbcType=VARCHAR},
+      create_time_user = #{createTimeUser,jdbcType=TIMESTAMP},
+      address_user = #{addressUser,jdbcType=VARCHAR},
+      last_login_time_user = #{lastLoginTimeUser,jdbcType=TIMESTAMP},
+      img_user = #{imgUser,jdbcType=VARCHAR},
+      ip_user = #{ipUser,jdbcType=VARCHAR}
+    where id_user = #{idUser,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getUserListCount" resultType="int">
+    select  count(*)  from user;
+  </select>
+
+  <select id="getUserList" resultType="map" parameterType="int">
+
+    select  * from user
+
+    LIMIT #{startNum}, #{endNum}
+
+  </select>
+</mapper>

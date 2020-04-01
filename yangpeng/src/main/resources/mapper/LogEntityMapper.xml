@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.LogEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.LogEntity" >
+    <result column="id_log" property="idLog" jdbcType="VARCHAR" />
+    <result column="type_log" property="typeLog" jdbcType="INTEGER" />
+    <result column="abnormal_log" property="abnormalLog" jdbcType="VARCHAR" />
+    <result column="time_log" property="timeLog" jdbcType="TIMESTAMP" />
+    <result column="request_url_log" property="requestUrlLog" jdbcType="VARCHAR" />
+    <result column="method_execution_time_log" property="methodExecutionTimeLog" jdbcType="VARCHAR" />
+    <result column="operate_person_log_id" property="operatePersonLogId" jdbcType="VARCHAR" />
+    <result column="ip_log" property="ipLog" jdbcType="VARCHAR" />
+    <result column="method_type" property="methodType" jdbcType="INTEGER" />
+    <result column="prarms" property="prarms" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.LogEntity" >
+    insert into log (id_log, type_log, abnormal_log, 
+      time_log, request_url_log, method_execution_time_log, 
+      operate_person_log_id, ip_log, method_type, 
+      prarms)
+    values (#{idLog,jdbcType=VARCHAR}, #{typeLog,jdbcType=INTEGER}, #{abnormalLog,jdbcType=VARCHAR}, 
+      #{timeLog,jdbcType=TIMESTAMP}, #{requestUrlLog,jdbcType=VARCHAR}, #{methodExecutionTimeLog,jdbcType=VARCHAR}, 
+      #{operatePersonLogId,jdbcType=VARCHAR}, #{ipLog,jdbcType=VARCHAR}, #{methodType,jdbcType=INTEGER}, 
+      #{prarms,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.LogEntity" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idLog != null" >
+        id_log,
+      </if>
+      <if test="typeLog != null" >
+        type_log,
+      </if>
+      <if test="abnormalLog != null" >
+        abnormal_log,
+      </if>
+      <if test="timeLog != null" >
+        time_log,
+      </if>
+      <if test="requestUrlLog != null" >
+        request_url_log,
+      </if>
+      <if test="methodExecutionTimeLog != null" >
+        method_execution_time_log,
+      </if>
+      <if test="operatePersonLogId != null" >
+        operate_person_log_id,
+      </if>
+      <if test="ipLog != null" >
+        ip_log,
+      </if>
+      <if test="methodType != null" >
+        method_type,
+      </if>
+      <if test="prarms != null" >
+        prarms,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idLog != null" >
+        #{idLog,jdbcType=VARCHAR},
+      </if>
+      <if test="typeLog != null" >
+        #{typeLog,jdbcType=INTEGER},
+      </if>
+      <if test="abnormalLog != null" >
+        #{abnormalLog,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLog != null" >
+        #{timeLog,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requestUrlLog != null" >
+        #{requestUrlLog,jdbcType=VARCHAR},
+      </if>
+      <if test="methodExecutionTimeLog != null" >
+        #{methodExecutionTimeLog,jdbcType=VARCHAR},
+      </if>
+      <if test="operatePersonLogId != null" >
+        #{operatePersonLogId,jdbcType=VARCHAR},
+      </if>
+      <if test="ipLog != null" >
+        #{ipLog,jdbcType=VARCHAR},
+      </if>
+      <if test="methodType != null" >
+        #{methodType,jdbcType=INTEGER},
+      </if>
+      <if test="prarms != null" >
+        #{prarms,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

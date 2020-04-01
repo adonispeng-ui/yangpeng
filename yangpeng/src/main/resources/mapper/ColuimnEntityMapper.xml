@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.ColuimnEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.ColuimnEntity" >
+    <id column="id_coluimn" property="idColuimn" jdbcType="VARCHAR" />
+    <result column="status_column" property="statusColumn" jdbcType="INTEGER" />
+    <result column="name_column" property="nameColumn" jdbcType="VARCHAR" />
+    <result column="level_column" property="levelColumn" jdbcType="INTEGER" />
+    <result column="banner_column" property="bannerColumn" jdbcType="VARCHAR" />
+    <result column="display_order_column" property="displayOrderColumn" jdbcType="INTEGER" />
+    <result column="describe_column" property="describeColumn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id_coluimn, status_column, name_column, level_column, banner_column, display_order_column, 
+    describe_column
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from coluimn
+    where id_coluimn = #{idColuimn,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from coluimn
+    where id_coluimn = #{idColuimn,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.ColuimnEntity" >
+    insert into coluimn (id_coluimn, status_column, name_column, 
+      level_column, banner_column, display_order_column, 
+      describe_column)
+    values (#{idColuimn,jdbcType=VARCHAR}, #{statusColumn,jdbcType=INTEGER}, #{nameColumn,jdbcType=VARCHAR}, 
+      #{levelColumn,jdbcType=INTEGER}, #{bannerColumn,jdbcType=VARCHAR}, #{displayOrderColumn,jdbcType=INTEGER}, 
+      #{describeColumn,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.ColuimnEntity" >
+    insert into coluimn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idColuimn != null" >
+        id_coluimn,
+      </if>
+      <if test="statusColumn != null" >
+        status_column,
+      </if>
+      <if test="nameColumn != null" >
+        name_column,
+      </if>
+      <if test="levelColumn != null" >
+        level_column,
+      </if>
+      <if test="bannerColumn != null" >
+        banner_column,
+      </if>
+      <if test="displayOrderColumn != null" >
+        display_order_column,
+      </if>
+      <if test="describeColumn != null" >
+        describe_column,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idColuimn != null" >
+        #{idColuimn,jdbcType=VARCHAR},
+      </if>
+      <if test="statusColumn != null" >
+        #{statusColumn,jdbcType=INTEGER},
+      </if>
+      <if test="nameColumn != null" >
+        #{nameColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="levelColumn != null" >
+        #{levelColumn,jdbcType=INTEGER},
+      </if>
+      <if test="bannerColumn != null" >
+        #{bannerColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrderColumn != null" >
+        #{displayOrderColumn,jdbcType=INTEGER},
+      </if>
+      <if test="describeColumn != null" >
+        #{describeColumn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yangpeng.entity.ColuimnEntity" >
+    update coluimn
+    <set >
+      <if test="statusColumn != null" >
+        status_column = #{statusColumn,jdbcType=INTEGER},
+      </if>
+      <if test="nameColumn != null" >
+        name_column = #{nameColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="levelColumn != null" >
+        level_column = #{levelColumn,jdbcType=INTEGER},
+      </if>
+      <if test="bannerColumn != null" >
+        banner_column = #{bannerColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrderColumn != null" >
+        display_order_column = #{displayOrderColumn,jdbcType=INTEGER},
+      </if>
+      <if test="describeColumn != null" >
+        describe_column = #{describeColumn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id_coluimn = #{idColuimn,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yangpeng.entity.ColuimnEntity" >
+    update coluimn
+    set status_column = #{statusColumn,jdbcType=INTEGER},
+      name_column = #{nameColumn,jdbcType=VARCHAR},
+      level_column = #{levelColumn,jdbcType=INTEGER},
+      banner_column = #{bannerColumn,jdbcType=VARCHAR},
+      display_order_column = #{displayOrderColumn,jdbcType=INTEGER},
+      describe_column = #{describeColumn,jdbcType=VARCHAR}
+    where id_coluimn = #{idColuimn,jdbcType=VARCHAR}
+  </update>
+</mapper>

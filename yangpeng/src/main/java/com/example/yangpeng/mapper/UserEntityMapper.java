@@ -2,6 +2,9 @@ package com.example.yangpeng.mapper;
 
 import com.example.yangpeng.entity.UserEntity;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserEntityMapper {
     int deleteByPrimaryKey(String idUser);
 
@@ -14,4 +17,8 @@ public interface UserEntityMapper {
     int updateByPrimaryKeySelective(UserEntity record);
 
     int updateByPrimaryKey(UserEntity record);
+
+    Integer getUserListCount();
+
+    List<Map<String, Object>> getUserList(Map<String, Object> params);
 }

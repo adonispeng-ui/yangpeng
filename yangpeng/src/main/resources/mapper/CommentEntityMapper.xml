@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.yangpeng.mapper.CommentEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.CommentEntity" >
+    <id column="id_comment" property="idComment" jdbcType="VARCHAR" />
+    <result column="id_article" property="idArticle" jdbcType="VARCHAR" />
+    <result column="id_coluimn" property="idColuimn" jdbcType="VARCHAR" />
+    <result column="user_id_comment" property="userIdComment" jdbcType="VARCHAR" />
+    <result column="user_content_comment" property="userContentComment" jdbcType="VARCHAR" />
+    <result column="account_user_id" property="accountUserId" jdbcType="VARCHAR" />
+    <result column="status_comment" property="statusComment" jdbcType="INTEGER" />
+    <result column="check_state" property="checkState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id_comment, id_article, id_coluimn, user_id_comment, user_content_comment, account_user_id, 
+    status_comment, check_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where id_comment = #{idComment,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from comment
+    where id_comment = #{idComment,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.yangpeng.entity.CommentEntity" >
+    insert into comment (id_comment, id_article, id_coluimn, 
+      user_id_comment, user_content_comment, account_user_id, 
+      status_comment, check_state)
+    values (#{idComment,jdbcType=VARCHAR}, #{idArticle,jdbcType=VARCHAR}, #{idColuimn,jdbcType=VARCHAR}, 
+      #{userIdComment,jdbcType=VARCHAR}, #{userContentComment,jdbcType=VARCHAR}, #{accountUserId,jdbcType=VARCHAR}, 
+      #{statusComment,jdbcType=INTEGER}, #{checkState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.yangpeng.entity.CommentEntity" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idComment != null" >
+        id_comment,
+      </if>
+      <if test="idArticle != null" >
+        id_article,
+      </if>
+      <if test="idColuimn != null" >
+        id_coluimn,
+      </if>
+      <if test="userIdComment != null" >
+        user_id_comment,
+      </if>
+      <if test="userContentComment != null" >
+        user_content_comment,
+      </if>
+      <if test="accountUserId != null" >
+        account_user_id,
+      </if>
+      <if test="statusComment != null" >
+        status_comment,
+      </if>
+      <if test="checkState != null" >
+        check_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idComment != null" >
+        #{idComment,jdbcType=VARCHAR},
+      </if>
+      <if test="idArticle != null" >
+        #{idArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="idColuimn != null" >
+        #{idColuimn,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdComment != null" >
+        #{userIdComment,jdbcType=VARCHAR},
+      </if>
+      <if test="userContentComment != null" >
+        #{userContentComment,jdbcType=VARCHAR},
+      </if>
+      <if test="accountUserId != null" >
+        #{accountUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusComment != null" >
+        #{statusComment,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.yangpeng.entity.CommentEntity" >
+    update comment
+    <set >
+      <if test="idArticle != null" >
+        id_article = #{idArticle,jdbcType=VARCHAR},
+      </if>
+      <if test="idColuimn != null" >
+        id_coluimn = #{idColuimn,jdbcType=VARCHAR},
+      </if>
+      <if test="userIdComment != null" >
+        user_id_comment = #{userIdComment,jdbcType=VARCHAR},
+      </if>
+      <if test="userContentComment != null" >
+        user_content_comment = #{userContentComment,jdbcType=VARCHAR},
+      </if>
+      <if test="accountUserId != null" >
+        account_user_id = #{accountUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusComment != null" >
+        status_comment = #{statusComment,jdbcType=INTEGER},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id_comment = #{idComment,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.yangpeng.entity.CommentEntity" >
+    update comment
+    set id_article = #{idArticle,jdbcType=VARCHAR},
+      id_coluimn = #{idColuimn,jdbcType=VARCHAR},
+      user_id_comment = #{userIdComment,jdbcType=VARCHAR},
+      user_content_comment = #{userContentComment,jdbcType=VARCHAR},
+      account_user_id = #{accountUserId,jdbcType=VARCHAR},
+      status_comment = #{statusComment,jdbcType=INTEGER},
+      check_state = #{checkState,jdbcType=INTEGER}
+    where id_comment = #{idComment,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -29,7 +29,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.example.yunwudata.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.yangpeng.controller.UserController"))
                 .paths(PathSelectors.any())//测试环境使用any() //线上环境使用none
                 //.paths(PathSelectors.none())//如果是线上环境，添加路径过滤，设置为全部都不符合 可以不用
                 .build();

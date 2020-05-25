@@ -23,6 +23,16 @@ public class UserEntity {
 
     private String ipUser;
 
+    private Date updateTimeUser;
+
+    public Date getUpdateTimeUser() {
+        return updateTimeUser;
+    }
+
+    public void setUpdateTimeUser(Date updateTimeUser) {
+        this.updateTimeUser = updateTimeUser;
+    }
+
     public String getIdUser() {
         return idUser;
     }

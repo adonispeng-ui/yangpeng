@@ -14,7 +14,7 @@
     <result column="ip_user" property="ipUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id_user, account_user, phone_user, email_user, password_user, create_time_user, address_user, 
+    id_user, account_user, phone_user, email_user, create_time_user, address_user,
     last_login_time_user, img_user, ip_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -157,9 +157,38 @@
 
   <select id="getUserList" resultType="map" parameterType="int">
 
-    select  * from user
-
-    LIMIT #{startNum}, #{endNum}
+    select
+        <include refid="Base_Column_List" />
+    from
+        user
+    <where>
+      <if test="accountUser != null" >
+        account_user = #{accountUser,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneUser != null" >
+        phone_user = #{phoneUser,jdbcType=INTEGER},
+      </if>
+      <if test="emailUser != null" >
+        email_user = #{emailUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTimeUser != null" >
+        create_time_user = #{createTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addressUser != null" >
+        address_user = #{addressUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTimeUser != null" >
+        last_login_time_user = #{lastLoginTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imgUser != null" >
+        img_user = #{imgUser,jdbcType=VARCHAR},
+      </if>
+      <if test="ipUser != null" >
+        ip_user = #{ipUser,jdbcType=VARCHAR},
+      </if>
+    </where>
+        order by create_time_user desc
+        LIMIT #{startNum}, #{endNum}
 
   </select>
 </mapper>

@@ -21,4 +21,6 @@ public interface UserEntityMapper {
     Integer getUserListCount();
 
     List<Map<String, Object>> getUserList(Map<String, Object> params);
+    //取用户名
+    String getUserByAccount(String accountUser);
 }

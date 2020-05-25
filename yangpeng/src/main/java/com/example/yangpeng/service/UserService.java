@@ -7,5 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserService {
+    //查询用户类表
     Page<Map<String, Object>> getUserList(Integer pageSize, Integer pageNumber);
+
+    //创建用户
+    Integer insertUser(UserEntity userEntity);
+    //查询用户
+    boolean getUserByAccount(String accountUser);
 }

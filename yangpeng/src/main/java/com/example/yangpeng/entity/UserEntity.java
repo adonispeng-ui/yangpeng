@@ -1,16 +1,32 @@
 package com.example.yangpeng.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.apache.catalina.User;
+
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserEntity {
+@ApiModel(description = "登录")
+
+public class UserEntity implements Serializable {
+
     private String idUser;
 
+    @ApiModelProperty(value = "账号", name = "accountUser", required = true, example = "admin")
+    @NotBlank(message = "账号不允许为空,请输入")
     private String accountUser;
 
-    private Integer phoneUser;
+    @ApiModelProperty(value = "手机", name = "emailUser", required = true)
+    private String phoneUser;
 
+    @ApiModelProperty(value = "邮箱", name = "emailUser", required = true, example = "xxx@126.com")
+    @NotBlank(message = "邮箱不允许为空,请输入")
     private String emailUser;
 
+    @ApiModelProperty(value = "密码", name = "passwordUser", required = true, example = "123456")
+    @NotBlank(message = "密码不允许为空,请输入")
     private String passwordUser;
 
     private Date createTimeUser;
@@ -49,11 +65,11 @@ public class UserEntity {
         this.accountUser = accountUser == null ? null : accountUser.trim();
     }
 
-    public Integer getPhoneUser() {
+    public String getPhoneUser() {
         return phoneUser;
     }
 
-    public void setPhoneUser(Integer phoneUser) {
+    public void setPhoneUser(String phoneUser) {
         this.phoneUser = phoneUser;
     }
 

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.example.yangpeng.entity.UserEntity" >
     <id column="id_user" property="idUser" jdbcType="VARCHAR" />
     <result column="account_user" property="accountUser" jdbcType="VARCHAR" />
-    <result column="phone_user" property="phoneUser" jdbcType="INTEGER" />
+    <result column="phone_user" property="phoneUser" jdbcType="VARCHAR" />
     <result column="email_user" property="emailUser" jdbcType="VARCHAR" />
     <result column="password_user" property="passwordUser" jdbcType="VARCHAR" />
     <result column="create_time_user" property="createTimeUser" jdbcType="TIMESTAMP" />
@@ -12,6 +12,8 @@
     <result column="last_login_time_user" property="lastLoginTimeUser" jdbcType="TIMESTAMP" />
     <result column="img_user" property="imgUser" jdbcType="VARCHAR" />
     <result column="ip_user" property="ipUser" jdbcType="VARCHAR" />
+    <result column="update_time_user" property="updateTimeUser" jdbcType="TIMESTAMP" />
+
   </resultMap>
   <sql id="Base_Column_List" >
     id_user, account_user, phone_user, email_user, create_time_user, address_user,
@@ -55,9 +57,9 @@
       <if test="passwordUser != null" >
         password_user,
       </if>
-      <if test="createTimeUser != null" >
+
         create_time_user,
-      </if>
+
       <if test="addressUser != null" >
         address_user,
       </if>
@@ -87,9 +89,9 @@
       <if test="passwordUser != null" >
         #{passwordUser,jdbcType=VARCHAR},
       </if>
-      <if test="createTimeUser != null" >
-        #{createTimeUser,jdbcType=TIMESTAMP},
-      </if>
+
+        now()
+
       <if test="addressUser != null" >
         #{addressUser,jdbcType=VARCHAR},
       </if>
@@ -191,4 +193,15 @@
         LIMIT #{startNum}, #{endNum}
 
   </select>
+
+  <select id="getUserByAccount"  resultType="string" parameterType="string">
+        SELECT
+            id_user
+        FROM
+            `user`
+        WHERE
+            account_user = #{accountUser,jdbcType=VARCHAR}
+  </select>
+
+
 </mapper>

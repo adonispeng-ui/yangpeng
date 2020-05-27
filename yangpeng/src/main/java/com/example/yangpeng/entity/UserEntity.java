@@ -1,16 +1,12 @@
 package com.example.yangpeng.entity;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.catalina.User;
 
 import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel(description = "登录")
+public class UserEntity {
 
-public class UserEntity implements Serializable {
 
     private String idUser;
 
@@ -41,13 +37,9 @@ public class UserEntity implements Serializable {
 
     private Date updateTimeUser;
 
-    public Date getUpdateTimeUser() {
-        return updateTimeUser;
-    }
+    private Integer statePhoneUser;
 
-    public void setUpdateTimeUser(Date updateTimeUser) {
-        this.updateTimeUser = updateTimeUser;
-    }
+    private Integer stateEmailUser;
 
     public String getIdUser() {
         return idUser;
@@ -70,7 +62,7 @@ public class UserEntity implements Serializable {
     }
 
     public void setPhoneUser(String phoneUser) {
-        this.phoneUser = phoneUser;
+        this.phoneUser = phoneUser == null ? null : phoneUser.trim();
     }
 
     public String getEmailUser() {
@@ -127,5 +119,29 @@ public class UserEntity implements Serializable {
 
     public void setIpUser(String ipUser) {
         this.ipUser = ipUser == null ? null : ipUser.trim();
+    }
+
+    public Date getUpdateTimeUser() {
+        return updateTimeUser;
+    }
+
+    public void setUpdateTimeUser(Date updateTimeUser) {
+        this.updateTimeUser = updateTimeUser;
+    }
+
+    public Integer getStatePhoneUser() {
+        return statePhoneUser;
+    }
+
+    public void setStatePhoneUser(Integer statePhoneUser) {
+        this.statePhoneUser = statePhoneUser;
+    }
+
+    public Integer getStateEmailUser() {
+        return stateEmailUser;
+    }
+
+    public void setStateEmailUser(Integer stateEmailUser) {
+        this.stateEmailUser = stateEmailUser;
     }
 }

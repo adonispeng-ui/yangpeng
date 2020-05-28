@@ -14,7 +14,7 @@ public class UserEntity {
     @NotBlank(message = "账号不允许为空,请输入")
     private String accountUser;
 
-    @ApiModelProperty(value = "手机", name = "emailUser", required = true)
+    @ApiModelProperty(value = "手机", name = "phoneUser", required = true)
     private String phoneUser;
 
     @ApiModelProperty(value = "邮箱", name = "emailUser", required = true, example = "xxx@126.com")
@@ -40,6 +40,26 @@ public class UserEntity {
     private Integer statePhoneUser;
 
     private Integer stateEmailUser;
+
+    private String codeEmailUser;
+
+    private String codePhoneUser;
+
+    public String getCodePhoneUser() {
+        return codePhoneUser;
+    }
+
+    public void setCodePhoneUser(String codePhoneUser) {
+        this.codePhoneUser = codePhoneUser;
+    }
+
+    public String getCodeEmailUser() {
+        return codeEmailUser;
+    }
+
+    public void setCodeEmailUser(String codeEmailUser) {
+        this.codeEmailUser = codeEmailUser;
+    }
 
     public String getIdUser() {
         return idUser;

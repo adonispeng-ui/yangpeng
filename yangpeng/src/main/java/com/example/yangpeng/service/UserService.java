@@ -13,5 +13,8 @@ public interface UserService {
     //创建用户
     Integer insertUser(UserEntity userEntity);
     //查询用户
-    boolean getUserByAccount(String accountUser);
+    Map<String, Object> getUserByAccount(Map<String,String> params);
+    //验证randomCode
+    boolean verifyRandomCode(String newLink);
+
 }

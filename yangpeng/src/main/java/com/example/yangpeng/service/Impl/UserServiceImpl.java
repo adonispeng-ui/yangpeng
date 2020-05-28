@@ -12,6 +12,9 @@ import sun.security.provider.MD5;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.example.yangpeng.utils.UUIDUtils.getUUID32;
+import static com.example.yangpeng.utils.eMailUtil.sendEmailUtil;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -69,33 +72,98 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Integer insertUser(UserEntity userEntity) {
-        userEntity.setIdUser(this.getUUID32());
-        System.out.println(userEntity.getIdUser());
+        userEntity.setIdUser(getUUID32());
+        //邮箱状态为0
+        userEntity.setStateEmailUser(0);
+        //64位uuid
+        String randomCode = getUUID32() + getUUID32();
+        userEntity.setCodeEmailUser(randomCode);
         int state = userEntityMapper.insertSelective(userEntity);
 
+        try {
+            //调用邮箱
+            sendEmailUtil(userEntity.getEmailUser(), randomCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return state;
     }
 
     /**
-     * 取用户名
+     * 获取用户状态
      *
-     * @param accountUser
+     * @param params
      * @return
      */
+
     @Override
-    public boolean getUserByAccount(String accountUser) {
-        //取库里用户名
-        String userId = userEntityMapper.getUserByAccount(accountUser);
+    public Map<String, Object> getUserByAccount(Map<String, String> params) {
+        boolean state = false;
+        String ErrorState = "可以注册";
+        Map<String, Object> newMap = new HashMap<>();
 
-        if (userId == null) {//没有用户
-            return true;
-        } else {//返回路径
-            return false;
+        for (String key : params.keySet()) {
+
+            switch (key) {
+                case "email":
+                    //通过邮箱取id
+                    String userIdBymail = userEntityMapper.getUserByMail(params.get(key));
+
+                    if (userIdBymail == null) {
+                        state = true;
+                        continue;
+                    } else {
+                        ErrorState = "您已经使用过此邮箱，请更好其他邮箱！";
+                        newMap.put("information", ErrorState);
+                        newMap.put("state", false);
+                        return newMap;
+                    }
+                case "account":
+                    //通过用户名取id
+                    String userIdByAccount = userEntityMapper.getUserByAccount(params.get(key));
+
+                    if (userIdByAccount == null) {
+                        state = true;
+                        continue;
+                    } else {
+                        ErrorState = "用户名已被使用，请更换用户名注册！";
+                        newMap.put("information", ErrorState);
+                        newMap.put("state", false);
+                        return newMap;
+                    }
+                case "phone":
+                    //通过手机取id
+                    String userIdByphone = userEntityMapper.getUserByPhone(params.get(key));
+                    if (userIdByphone == null) {
+                        state = true;
+                        continue;
+                    } else {
+                        ErrorState = "手机号已被使用，请更换手机号注册！";
+                        newMap.put("information", ErrorState);
+                        newMap.put("state", false);
+                        return newMap;
+                    }
+            }
         }
+        newMap.put("information", ErrorState);
+        newMap.put("state", state);
+        return newMap;
     }
 
-    //生成uuid
-    public static String getUUID32() {
-        return UUID.randomUUID().toString().replace("-", "").toLowerCase();
+    @Override
+    public boolean verifyRandomCode(String newLink) {
+        //通过邮箱随机码 来查询是否有用户
+        String userId = userEntityMapper.verifyRandomCode(newLink);
+        if (userId == null) {
+            return false;
+        } else {
+            Integer state = userEntityMapper.updateMailstate(userId);
+            if (state == 1) {
+                return true;
+            }
+        }
+        return false;
     }
+
+
 }

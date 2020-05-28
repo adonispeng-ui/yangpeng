@@ -21,6 +21,14 @@ public interface UserEntityMapper {
     Integer getUserListCount();
 
     List<Map<String, Object>> getUserList(Map<String, Object> params);
-    //取用户名
-    String getUserByAccount(String accountUser);
+    //用户名取id
+    String getUserByAccount(String userIdByAccount);
+    //邮箱取id
+    String getUserByMail(String userIdBymail);
+    //手机号取id
+    String getUserByPhone(String userIdByphone);
+    //通过邮箱码查询是否有用户
+    String verifyRandomCode(String newLink);
+    //修改用户邮箱状态
+    Integer updateMailstate(String userId);
 }

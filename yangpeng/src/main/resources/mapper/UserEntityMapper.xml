@@ -13,14 +13,18 @@
     <result column="img_user" property="imgUser" jdbcType="VARCHAR" />
     <result column="ip_user" property="ipUser" jdbcType="VARCHAR" />
     <result column="update_time_user" property="updateTimeUser" jdbcType="TIMESTAMP" />
-
+    <result column="state_phone_user" property="statePhoneUser" jdbcType="INTEGER" />
+    <result column="state_email_user" property="stateEmailUser" jdbcType="INTEGER" />
+    <result column="code_email_user" property="codeEmailUser" jdbcType="VARCHAR" />
+    <result column="code_phone_user" property="codePhoneUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id_user, account_user, phone_user, email_user, create_time_user, address_user,
-    last_login_time_user, img_user, ip_user
+    id_user, account_user, phone_user, email_user, password_user, create_time_user, address_user,
+    last_login_time_user, img_user, ip_user, update_time_user, state_phone_user, state_email_user,
+    code_email_user, code_phone_user
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user
     where id_user = #{idUser,jdbcType=VARCHAR}
@@ -30,14 +34,18 @@
     where id_user = #{idUser,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.example.yangpeng.entity.UserEntity" >
-    insert into user (id_user, account_user, phone_user, 
-      email_user, password_user, create_time_user, 
-      address_user, last_login_time_user, img_user, 
-      ip_user)
-    values (#{idUser,jdbcType=VARCHAR}, #{accountUser,jdbcType=VARCHAR}, #{phoneUser,jdbcType=INTEGER}, 
-      #{emailUser,jdbcType=VARCHAR}, #{passwordUser,jdbcType=VARCHAR}, #{createTimeUser,jdbcType=TIMESTAMP}, 
-      #{addressUser,jdbcType=VARCHAR}, #{lastLoginTimeUser,jdbcType=TIMESTAMP}, #{imgUser,jdbcType=VARCHAR}, 
-      #{ipUser,jdbcType=VARCHAR})
+    insert into user (id_user, account_user, phone_user,
+      email_user, password_user, create_time_user,
+      address_user, last_login_time_user, img_user,
+      ip_user, update_time_user, state_phone_user,
+      state_email_user, code_email_user, code_phone_user
+      )
+    values (#{idUser,jdbcType=VARCHAR}, #{accountUser,jdbcType=VARCHAR}, #{phoneUser,jdbcType=VARCHAR},
+      #{emailUser,jdbcType=VARCHAR}, #{passwordUser,jdbcType=VARCHAR}, #{createTimeUser,jdbcType=TIMESTAMP},
+      #{addressUser,jdbcType=VARCHAR}, #{lastLoginTimeUser,jdbcType=TIMESTAMP}, #{imgUser,jdbcType=VARCHAR},
+      #{ipUser,jdbcType=VARCHAR}, #{updateTimeUser,jdbcType=TIMESTAMP}, #{statePhoneUser,jdbcType=INTEGER},
+      #{stateEmailUser,jdbcType=INTEGER}, #{codeEmailUser,jdbcType=VARCHAR}, #{codePhoneUser,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.yangpeng.entity.UserEntity" >
     insert into user
@@ -72,6 +80,21 @@
       <if test="ipUser != null" >
         ip_user,
       </if>
+      <if test="updateTimeUser != null" >
+        update_time_user,
+      </if>
+      <if test="statePhoneUser != null" >
+        state_phone_user,
+      </if>
+      <if test="stateEmailUser != null" >
+        state_email_user,
+      </if>
+      <if test="codeEmailUser != null" >
+        code_email_user,
+      </if>
+      <if test="codePhoneUser != null" >
+        code_phone_user,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idUser != null" >
@@ -81,7 +104,7 @@
         #{accountUser,jdbcType=VARCHAR},
       </if>
       <if test="phoneUser != null" >
-        #{phoneUser,jdbcType=INTEGER},
+        #{phoneUser,jdbcType=VARCHAR},
       </if>
       <if test="emailUser != null" >
         #{emailUser,jdbcType=VARCHAR},
@@ -90,7 +113,7 @@
         #{passwordUser,jdbcType=VARCHAR},
       </if>
 
-        now()
+       now(),
 
       <if test="addressUser != null" >
         #{addressUser,jdbcType=VARCHAR},
@@ -104,6 +127,21 @@
       <if test="ipUser != null" >
         #{ipUser,jdbcType=VARCHAR},
       </if>
+      <if test="updateTimeUser != null" >
+        #{updateTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statePhoneUser != null" >
+        #{statePhoneUser,jdbcType=INTEGER},
+      </if>
+      <if test="stateEmailUser != null" >
+        #{stateEmailUser,jdbcType=INTEGER},
+      </if>
+      <if test="codeEmailUser != null" >
+        #{codeEmailUser,jdbcType=VARCHAR},
+      </if>
+      <if test="codePhoneUser != null" >
+        #{codePhoneUser,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.yangpeng.entity.UserEntity" >
@@ -113,7 +151,7 @@
         account_user = #{accountUser,jdbcType=VARCHAR},
       </if>
       <if test="phoneUser != null" >
-        phone_user = #{phoneUser,jdbcType=INTEGER},
+        phone_user = #{phoneUser,jdbcType=VARCHAR},
       </if>
       <if test="emailUser != null" >
         email_user = #{emailUser,jdbcType=VARCHAR},
@@ -136,22 +174,44 @@
       <if test="ipUser != null" >
         ip_user = #{ipUser,jdbcType=VARCHAR},
       </if>
+      <if test="updateTimeUser != null" >
+        update_time_user = #{updateTimeUser,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statePhoneUser != null" >
+        state_phone_user = #{statePhoneUser,jdbcType=INTEGER},
+      </if>
+      <if test="stateEmailUser != null" >
+        state_email_user = #{stateEmailUser,jdbcType=INTEGER},
+      </if>
+      <if test="codeEmailUser != null" >
+        code_email_user = #{codeEmailUser,jdbcType=VARCHAR},
+      </if>
+      <if test="codePhoneUser != null" >
+        code_phone_user = #{codePhoneUser,jdbcType=VARCHAR},
+      </if>
     </set>
     where id_user = #{idUser,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.yangpeng.entity.UserEntity" >
     update user
     set account_user = #{accountUser,jdbcType=VARCHAR},
-      phone_user = #{phoneUser,jdbcType=INTEGER},
+      phone_user = #{phoneUser,jdbcType=VARCHAR},
       email_user = #{emailUser,jdbcType=VARCHAR},
       password_user = #{passwordUser,jdbcType=VARCHAR},
       create_time_user = #{createTimeUser,jdbcType=TIMESTAMP},
       address_user = #{addressUser,jdbcType=VARCHAR},
       last_login_time_user = #{lastLoginTimeUser,jdbcType=TIMESTAMP},
       img_user = #{imgUser,jdbcType=VARCHAR},
-      ip_user = #{ipUser,jdbcType=VARCHAR}
+      ip_user = #{ipUser,jdbcType=VARCHAR},
+      update_time_user = #{updateTimeUser,jdbcType=TIMESTAMP},
+      state_phone_user = #{statePhoneUser,jdbcType=INTEGER},
+      state_email_user = #{stateEmailUser,jdbcType=INTEGER},
+      code_email_user = #{codeEmailUser,jdbcType=VARCHAR},
+      code_phone_user = #{codePhoneUser,jdbcType=VARCHAR}
     where id_user = #{idUser,jdbcType=VARCHAR}
   </update>
+
+
 
   <select id="getUserListCount" resultType="int">
     select  count(*)  from user;
@@ -160,9 +220,9 @@
   <select id="getUserList" resultType="map" parameterType="int">
 
     select
-        <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />
     from
-        user
+    user
     <where>
       <if test="accountUser != null" >
         account_user = #{accountUser,jdbcType=VARCHAR},
@@ -189,8 +249,8 @@
         ip_user = #{ipUser,jdbcType=VARCHAR},
       </if>
     </where>
-        order by create_time_user desc
-        LIMIT #{startNum}, #{endNum}
+    order by create_time_user desc
+    LIMIT #{startNum}, #{endNum}
 
   </select>
 
@@ -203,5 +263,36 @@
             account_user = #{accountUser,jdbcType=VARCHAR}
   </select>
 
-
+  <select id="getUserByMail" resultType="string" parameterType="string" >
+        SELECT
+            id_user
+        FROM
+            `user`
+        WHERE
+             email_user = #{emailUser,jdbcType=VARCHAR}
+  </select>
+  <select id="getUserByPhone" resultType="string" parameterType="string" >
+        SELECT
+            id_user
+        FROM
+            `user`
+        WHERE
+            phone_user = #{phoneUser,jdbcType=INTEGER}
+  </select>
+  <select id="verifyRandomCode" parameterType="string" resultType="string">
+        SELECT
+            id_user
+        FROM
+            `user`
+        WHERE
+            code_email_user = #{newLink}
+  </select>
+  <update id="updateMailstate" parameterType="string"  >
+        UPDATE
+            `user`
+        SET
+            state_email_user = 1
+        WHERE
+            id_user = #{userId}
+  </update>
 </mapper>

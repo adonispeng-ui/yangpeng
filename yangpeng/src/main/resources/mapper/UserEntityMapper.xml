@@ -19,7 +19,7 @@
     <result column="code_phone_user" property="codePhoneUser" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id_user, account_user, phone_user, email_user, password_user, create_time_user, address_user,
+    id_user, account_user, phone_user, email_user,  create_time_user, address_user,
     last_login_time_user, img_user, ip_user, update_time_user, state_phone_user, state_email_user,
     code_email_user, code_phone_user
   </sql>

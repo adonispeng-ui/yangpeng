@@ -7,13 +7,14 @@ import com.example.yangpeng.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.security.provider.MD5;
+import com.example.yangpeng.utils.MD5;
+
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.example.yangpeng.utils.UUIDUtils.getUUID32;
-import static com.example.yangpeng.utils.eMailUtil.sendEmailUtil;
+import com.example.yangpeng.utils.eMailUtil;
 
 @Service
 @Transactional
@@ -21,6 +22,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserEntityMapper userEntityMapper;
+
+    @Autowired
+    private eMailUtil eMailUtil;
+    @Autowired
+    private  MD5 md5Util;
 
 
     @Override
@@ -78,11 +84,18 @@ public class UserServiceImpl implements UserService {
         //64位uuid
         String randomCode = getUUID32() + getUUID32();
         userEntity.setCodeEmailUser(randomCode);
+        String newPassword =  md5Util.getMD5(userEntity.getPasswordUser(),userEntity.getPasswordUser().length());
+
+        userEntity.setPasswordUser(newPassword);
+
         int state = userEntityMapper.insertSelective(userEntity);
+
+
+
 
         try {
             //调用邮箱
-            sendEmailUtil(userEntity.getEmailUser(), randomCode);
+            eMailUtil.sendEmailUtil(userEntity.getEmailUser(), randomCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,6 +176,14 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean updateUser(String userName, String password) {
+        //第一步通过用户名去取密码 然后在通过密码来确认  进行更改
+
+
+        return true;
     }
 
 

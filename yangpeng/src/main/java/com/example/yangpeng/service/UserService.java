@@ -16,5 +16,6 @@ public interface UserService {
     Map<String, Object> getUserByAccount(Map<String,String> params);
     //验证randomCode
     boolean verifyRandomCode(String newLink);
-
+    //修改密码
+    boolean updateUser(String userName, String password);
 }

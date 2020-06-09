@@ -1,10 +1,12 @@
 package com.example.yangpeng.mapper;
 
 import com.example.yangpeng.entity.UserEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public interface UserEntityMapper {
     int deleteByPrimaryKey(String idUser);
 

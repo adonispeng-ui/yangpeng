@@ -1,9 +1,11 @@
 package com.example.yangpeng.utils;
 
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
+@Component
 public class MD5 {
 
     public static String getMD5(String plainText, int length) {

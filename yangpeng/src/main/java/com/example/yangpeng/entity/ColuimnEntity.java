@@ -1,73 +1,43 @@
 package com.example.yangpeng.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.NotBlank;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ApiModel(value = "栏目")
 public class ColuimnEntity {
+
     private String idColuimn;
 
     private Integer statusColumn;
 
+    @ApiModelProperty(value = "栏目名", name = "nameColumn", required = true, example = "xx栏目")
+    @NotBlank(message = "栏目名不允许为空,请输入")
     private String nameColumn;
 
     private Integer levelColumn;
 
+    @ApiModelProperty(value = "导航图", name = "bannerColumn", required = true, example = "xxx.com")
+    @NotBlank(message = "导航图不允许为空,请输入")
     private String bannerColumn;
 
+    @ApiModelProperty(value = "显示顺序", name = "displayOrderColumn", required = true, example = "1")
+    @NotBlank(message = "导航图不允许为空,请输入")
     private Integer displayOrderColumn;
 
+    @ApiModelProperty(value = "栏目介绍", name = "describeColumn", required = true, example = "xx栏目介绍")
+    @NotBlank(message = "导航图不允许为空,请输入")
     private String describeColumn;
 
-    public String getIdColuimn() {
-        return idColuimn;
-    }
+    private String  ParentLevelColumn;
 
-    public void setIdColuimn(String idColuimn) {
-        this.idColuimn = idColuimn == null ? null : idColuimn.trim();
-    }
-
-    public Integer getStatusColumn() {
-        return statusColumn;
-    }
-
-    public void setStatusColumn(Integer statusColumn) {
-        this.statusColumn = statusColumn;
-    }
-
-    public String getNameColumn() {
-        return nameColumn;
-    }
-
-    public void setNameColumn(String nameColumn) {
-        this.nameColumn = nameColumn == null ? null : nameColumn.trim();
-    }
-
-    public Integer getLevelColumn() {
-        return levelColumn;
-    }
-
-    public void setLevelColumn(Integer levelColumn) {
-        this.levelColumn = levelColumn;
-    }
-
-    public String getBannerColumn() {
-        return bannerColumn;
-    }
-
-    public void setBannerColumn(String bannerColumn) {
-        this.bannerColumn = bannerColumn == null ? null : bannerColumn.trim();
-    }
-
-    public Integer getDisplayOrderColumn() {
-        return displayOrderColumn;
-    }
-
-    public void setDisplayOrderColumn(Integer displayOrderColumn) {
-        this.displayOrderColumn = displayOrderColumn;
-    }
-
-    public String getDescribeColumn() {
-        return describeColumn;
-    }
-
-    public void setDescribeColumn(String describeColumn) {
-        this.describeColumn = describeColumn == null ? null : describeColumn.trim();
-    }
 }

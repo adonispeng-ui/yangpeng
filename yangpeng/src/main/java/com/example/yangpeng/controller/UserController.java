@@ -3,24 +3,31 @@ package com.example.yangpeng.controller;
 import com.example.yangpeng.entity.UserEntity;
 import com.example.yangpeng.service.UserService;
 import com.example.yangpeng.utils.Page;
+import com.example.yangpeng.utils.RedisUtils;
 import com.example.yangpeng.utils.ResultJson;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+
+@Slf4j
 @CrossOrigin
 @RestController
-@RequestMapping("interface")
-@Api(tags = "接口")
+@RequestMapping("userInterface")
+@Api(tags = "用户接口")
 public class UserController {
+    private static int ExpireTime = 60;   // redis中存储的过期时间60s
+
+    @Resource
+    private RedisUtils redisUtil;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -190,5 +197,52 @@ public class UserController {
         return json;
     }
 
+
+
+    /**
+     *用户修改密码
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    @ApiOperation(value = "修改用户密码", notes = "修改用户密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName", value = "用户名", dataType = "string", paramType = "query", example = "1"),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "string", paramType = "query", example = "1")
+    })
+    @GetMapping(value = "/updateUser")
+    @ResponseBody
+    public ResultJson verifyMailbox(String userName,String password) {
+        ResultJson json = new ResultJson();
+
+        if (userName == null) {
+            json.setSuccess(false);
+            json.setMsg("用户名不能为空");
+            json.setCode(401);
+            return json;
+        }
+        if (password == null) {
+            json.setSuccess(false);
+            json.setMsg("账号密码不能为空");
+            json.setCode(401);
+            return json;
+        }
+        try {
+            boolean userStste = userService.updateUser(userName,password);
+            if (userStste == true) {
+                json.setSuccess(true);
+                json.setCode(200);
+                json.setMsg("验证成功");
+            } else {
+                json.setSuccess(false);
+                json.setCode(500);
+                json.setMsg("验证失败");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
 
 }

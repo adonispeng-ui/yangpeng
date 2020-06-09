@@ -1,7 +1,12 @@
 package com.example.yangpeng.mapper;
 
 import com.example.yangpeng.entity.ColuimnEntity;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
+@Repository
 public interface ColuimnEntityMapper {
     int deleteByPrimaryKey(String idColuimn);
 
@@ -14,4 +19,9 @@ public interface ColuimnEntityMapper {
     int updateByPrimaryKeySelective(ColuimnEntity record);
 
     int updateByPrimaryKey(ColuimnEntity record);
+
+    Integer examineByColuimnId(String idColuimn,Integer statusColumn);
+
+    List listColuimnById(Map<String, Object> params );
+
 }

@@ -9,6 +9,7 @@
     <result column="banner_column" property="bannerColumn" jdbcType="VARCHAR" />
     <result column="display_order_column" property="displayOrderColumn" jdbcType="INTEGER" />
     <result column="describe_column" property="describeColumn" jdbcType="VARCHAR" />
+    <result column="parent_level_column" property="parentLevelColumn" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id_coluimn, status_column, name_column, level_column, banner_column, display_order_column, 
@@ -56,6 +57,9 @@
       <if test="describeColumn != null" >
         describe_column,
       </if>
+      <if test="parentLevelColumn != null" >
+        parent_level_column,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idColuimn != null" >
@@ -78,6 +82,9 @@
       </if>
       <if test="describeColumn != null" >
         #{describeColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="parentLevelColumn != null" >
+        #{parentLevelColumn,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -115,4 +122,35 @@
       describe_column = #{describeColumn,jdbcType=VARCHAR}
     where id_coluimn = #{idColuimn,jdbcType=VARCHAR}
   </update>
+  <update id="examineByColuimnId" parameterType="list">
+
+    UPDATE
+        coluimn
+    SET
+        status_column = #{statusColumn,jdbcType=INTEGER}
+    WHERE
+        id_coluimn = #{idColuimn,jdbcType=VARCHAR}
+
+  </update>
+
+  <select id="listColuimnById" parameterType="map" resultType="map">
+    SELECT
+        *
+    FROM
+        coluimn
+    <where>
+      <if test="parentLevelColumn != null" >
+        parent_level_column =  #{parentLevelColumn,jdbcType=VARCHAR}
+      </if>
+      AND
+      status_column = '1'
+      <if test="startNum != null and endNum != null "  >
+        LIMIT #{startNum}, #{endNum}
+      </if>
+    </where>
+  </select>
+  <select id="listColuimn" resultType="list">
+
+
+  </select>
 </mapper>

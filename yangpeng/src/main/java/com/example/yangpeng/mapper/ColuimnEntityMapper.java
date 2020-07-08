@@ -24,4 +24,5 @@ public interface ColuimnEntityMapper {
 
     List listColuimnById(Map<String, Object> params );
 
+    Integer countColuimnById(Map<String, Object> params);
 }

@@ -25,7 +25,6 @@ import java.util.Map;
 @Api(tags = "用户接口")
 public class UserController {
     private static int ExpireTime = 60;   // redis中存储的过期时间60s
-
     @Resource
     private RedisUtils redisUtil;
 
@@ -242,6 +241,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return json;
     }
 

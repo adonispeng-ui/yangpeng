@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -192,7 +190,7 @@ public class ColuimnController {
         }
         return json;
     }
-    @ApiOperation(value = "通过id查询列表", notes = "审核列表")
+    @ApiOperation(value = "通过父id查询列表", notes = "审核列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "parentLevelColumn", value = "栏目id", dataType = "String", paramType = "query", example = "1"),
             @ApiImplicitParam(name = "pageSize", value = "分页参数（必传）", dataType = "int", paramType = "query", example = "1"),
@@ -203,7 +201,7 @@ public class ColuimnController {
             @ApiResponse(code = 404, message = "找不到请求路径")
     })
     /**
-     * 通过id 查询列表id
+     * 通过父id 查询列表id
      * @param idColuimn
      * @return
      */
@@ -211,9 +209,11 @@ public class ColuimnController {
     @GetMapping("/listColuimnById")
     public ResultJson listColuimnById(@RequestParam(value = "parentLevelColumn") String parentLevelColumn ,
                                       @RequestParam(value = "pageSize") int pageSize,
-                                      @RequestParam(value = "pageNumber") int pageNumber) {
+                                      @RequestParam(value = "pageNumber") int pageNumber,
+                                      @RequestParam(value = "statusColumn" ) int statusColumn
+                                      ) {
         ResultJson json = new ResultJson();
-        Page<Map<String, Object>> list  = coluimnService.listColuimnById(parentLevelColumn,pageSize,pageNumber);
+        Page<Map<String, Object>> list  = coluimnService.listColuimnById(parentLevelColumn,pageSize,pageNumber,statusColumn);
         json.setObj(list);
         json.setSuccess(true);
         json.setCode(200);

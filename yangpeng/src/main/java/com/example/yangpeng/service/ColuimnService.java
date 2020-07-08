@@ -19,7 +19,7 @@ public interface ColuimnService {
 
     Integer examineByColuimnId(String idColuimn,Integer statusColumn);
 
-    Page<Map<String, Object>> listColuimnById(String parentLevelColumn, Integer pageSize , Integer pageNumber);
+    Page<Map<String, Object>> listColuimnById(String parentLevelColumn, Integer pageSize , Integer pageNumber,int statusColumn);
 
 
 }

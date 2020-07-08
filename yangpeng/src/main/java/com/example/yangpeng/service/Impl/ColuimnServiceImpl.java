@@ -43,7 +43,7 @@ public class ColuimnServiceImpl  implements ColuimnService {
     }
 
     @Override
-    public Page<Map<String, Object>>  listColuimnById(String parentLevelColumn, Integer pageSize, Integer pageNumber) {
+    public Page<Map<String, Object>>  listColuimnById(String parentLevelColumn, Integer pageSize, Integer pageNumber,int statusColumn) {
         // 先创建一个page 对象 然后把pageSize 和pageNumber 传给page
         Page<Map<String, Object>> page = new Page<Map<String, Object>>(pageSize != null ? pageSize : 0);
         // 创建成员变量 endNum 结束分页
@@ -68,18 +68,15 @@ public class ColuimnServiceImpl  implements ColuimnService {
         params.put("startNum", startNum);
         params.put("endNum", pageSize);
         params.put("parentLevelColumn", parentLevelColumn);
-
-
-        // 通过用户名查询所有条数
-        // Integer  totalCount = mapper.getVideoTypeCount(params);
+        params.put("statusColumn",statusColumn);
 
         List<Map<String, Object>> list  = coluimnEntityMapper.listColuimnById(params);
-
+        // 通过用户名查询所有条数
+        Integer  totalCount = coluimnEntityMapper.countColuimnById(params);
 
         // 把 查到的 数据传给 page
         page.setResult(list);
-        //page.setTotalCount(totalCount);
-        // 返回给 controller page
+        page.setTotalCount(totalCount);
         return page  ;
     }
 

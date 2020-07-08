@@ -135,7 +135,7 @@
 
   <select id="listColuimnById" parameterType="map" resultType="map">
     SELECT
-        *
+    <include refid="Base_Column_List" />
     FROM
         coluimn
     <where>
@@ -143,14 +143,24 @@
         parent_level_column =  #{parentLevelColumn,jdbcType=VARCHAR}
       </if>
       AND
-      status_column = '1'
+      status_column = #{statusColumn}
       <if test="startNum != null and endNum != null "  >
         LIMIT #{startNum}, #{endNum}
       </if>
     </where>
   </select>
-  <select id="listColuimn" resultType="list">
 
-
+  <select id="countColuimnById" parameterType="map" resultType="int">
+    SELECT
+        count(*)
+    FROM
+        `coluimn`
+    WHERE
+        parent_level_column = #{parentLevelColumn,jdbcType=VARCHAR}
+    AND
+        status_column = #{statusColumn}
   </select>
+
+
+
 </mapper>
